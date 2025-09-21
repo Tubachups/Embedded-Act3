@@ -1,5 +1,6 @@
-from flask import Flask, Response
+from flask import Flask, Response, render_template, jsonify
 from camera import init_camera, cleanup_camera, get_camera
+from pir import pir_state  
 import io
 import time
 import atexit
@@ -7,17 +8,15 @@ import atexit
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-# Register cleanup function
 atexit.register(cleanup_camera)
 
 @app.route('/')
 def index():
-    return '<h1>Pi Camera asdsad</h1><img src="/stream" width="640" height="480">'
+    return render_template('index.html')
 
 @app.route('/stream')
 def stream():
     init_camera()
-    
     picam2 = get_camera()
     if picam2 is None:
         return "Camera not available", 503
@@ -37,6 +36,10 @@ def stream():
     
     return Response(generate(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/pir_status')
+def pir_status():
+    return jsonify(pir_state)
 
 if __name__ == '__main__':
     try:

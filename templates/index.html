@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pi Camera Stream</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Pi Camera Live Stream</h1>
+    <div class="camera-container">
+        <img id="camera-feed" src="{{ url_for('stream') }}" width="640" height="480">
+    </div>
+     <div id="pir-status">Loading PIR status...</div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
