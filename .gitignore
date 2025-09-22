@@ -24,3 +24,10 @@ Thumbs.db
 # Database files (if any)
 *.db
 *.sqlite3
+
+# Environment Variables
+.env
+
+# Project specific - captured media files
+static/motion_images/*.jpg
+static/motion_videos/*.h264
