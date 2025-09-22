@@ -10,8 +10,19 @@
     <div class="camera-container">
         <img id="camera-feed" src="{{ url_for('stream') }}" width="640" height="480">
     </div>
-     <div id="pir-status">Loading PIR status...</div>
+     <p>  
+        Motion Status: <span id="pir-status">Loading PIR status...</span>
+     </p>
+     <p>
+        Buzzer: <span id="buzzer">--</span>
+     </p>
 
+    <!-- Chart -->
+    <div style="width: 700px; margin-top: 20px;">
+        <canvas id="pirChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

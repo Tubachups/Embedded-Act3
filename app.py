@@ -1,6 +1,7 @@
 from flask import Flask, Response, render_template, jsonify
 from camera import init_camera, cleanup_camera, get_camera
 from pir import pir_state  
+from database import get_readings, init_db
 import io
 import time
 import atexit
@@ -9,6 +10,7 @@ app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 atexit.register(cleanup_camera)
+init_db()
 
 @app.route('/')
 def index():
@@ -40,6 +42,12 @@ def stream():
 @app.route('/pir_status')
 def pir_status():
     return jsonify(pir_state)
+
+@app.route('/pir_history')
+def pir_history():
+    rows = get_readings(limit=15)
+    return jsonify([{"status": r[0], "buzzer": r[1], "timestamp": r[2]} for r in rows])
+
 
 if __name__ == '__main__':
     try:

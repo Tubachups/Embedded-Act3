@@ -31,3 +31,7 @@ Thumbs.db
 # Project specific - captured media files
 static/motion_images/*.jpg
 static/motion_videos/*.h264
+
+# Keep the directories but not the files
+!static/motion_images/.gitkeep
+!static/motion_videos/.gitkeep
