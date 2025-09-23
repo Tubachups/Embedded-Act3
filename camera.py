@@ -18,7 +18,7 @@ def init_camera():
             picam2 = Picamera2()
             # Configure for video recording
             video_config = picam2.create_video_configuration(
-                main={"size": (1920, 1080)},
+                main={"size": (800, 600)},
                 encode="main"
             )
             picam2.configure(video_config)
